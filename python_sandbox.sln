@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31911.196
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "python_sandbox", "python_sandbox.pyproj", "{89F6D8C7-08BF-4AED-91CD-91FC35558908}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{89F6D8C7-08BF-4AED-91CD-91FC35558908}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89F6D8C7-08BF-4AED-91CD-91FC35558908}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4D745322-07C1-4117-B17B-80F6ECF6EB70}
+	EndGlobalSection
+EndGlobal
