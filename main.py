@@ -91,6 +91,35 @@ class App:
         pass
 
 
-app = App()
-print(app.input_method.get_procedure())
+class Pet:
+    def __init__(self):
+        print("Pet constructed")
+
+    def voice(self):
+        pass
+
+class Dog(Pet):
+    def __init__(self):
+        Pet.__init__(super)
+        print("Dog constructed")
+
+    def voice(self):
+        print("Waf Waf Waf")
+
+class Cat(Pet):
+    def __init__(self):
+        Pet.__init__(self)
+        print("Cat constructed")
+
+    def voice(self):
+        print("Mayu mayu mayu")
+
+
+#app = App()
+#print(app.input_method.get_procedure())
+
+pets = (Dog(), Cat(), Pet())
+
+for pet in pets:
+    pet.voice()
 
