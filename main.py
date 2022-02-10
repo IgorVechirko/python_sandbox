@@ -1,40 +1,86 @@
 import sys
-import enum
+from enum import Enum
+import utils
 
-class ProtocolType(enum.Enum):
+from loger import Logger
 
+class ProtocolType(Enum):
     UNDEF = 0
     JSON = 1
 
-class TransportInfo:
-    pass
+class TransportType(Enum):
+    UNDEF = 0
+    IPv4 = 1
 
-class Header:
 
-    def __init__(self):
-        self.data_size = 0
-        self.protocol_type = ProtocolType.UNDEF
-        data = bytearray()
+class Procedure:
+    def __init__(self, name = "", params = {}):
+        self._name = name
+        self._params = params
+
+class ProcedureResult:
+    def __init__(self, result_fields = {}):
+        self._result_fields = result_fields
 
 class Serializer:
+    def __init__(self, protocol_type = ProtocolType.UNDEF):
+        self._protocol_type = protocol_type
+
+    def procedure_to_data(self, procedure) -> bytearray:
+        utils.unimplement_method()
+
+class JSONSerializer(Serializer):
     pass
 
 class Request:
+    def __init__(self, procedure = Procedure(), serializer = Serializer()):
+        self._serializer = serializer
+        self._procedure = procedure
 
-    def __init__(self, serializer):
-        self.header = Header()
-        self.serializer = serializer
+    def header_data(self) -> bytearray():
+        utils.unimplement_method()
 
-class Response:
-    pass
+    def pdu_data(self) -> byteaaray():
+        utils.unimplement_method()
 
 class Transport:
-    
-    def send_request(self, request, completer):
-        pass
+    def __init__(self, transport_type = Transport.UNDEF):
+        self._transport_type = transport_type
+
+    def send_request(self, request):
+        utils.unimplement_method()
+
+class IPv4Transport(Transport):
+    pass
+
+
+class Parser:
+    def __init__(self, protocol_type = ProtocolType.UNDEF):
+        self._protocol_type = protocol_type
+
+    def parse_response(response_data) -> ProcedureResult:
+        utils.unimplement_method()
+
+class JSONParser(Parser):
+    pass
+
+class Response:
+    def __init__(self, request = Request(), parser = Parser()):
+        self._request = request
+        self._parser = parser
+
+    def procedure_result() -> ProcedureResult:
+        utils.unimplement_method()
+
 
 class IOMethod:
+    def get_procedure(self):
+        utils.unimplement_method()
+
+    def put_result(self, result):
+        utils.unimplement_method()
     
+class Console(IOMethod):
     def get_procedure(self):
         method = sys.argv[1]
         params = {}
@@ -67,6 +113,16 @@ class IOMethod:
     def put_result(self, result):
         print(result)
 
+class Factory:
+    def creat_serializer(self, protocol_type = ProtocolType.UNDEF) -> Serializer:
+        utils.unimplement_method()
+
+    def create_pareser(self, protocol_type = ProtocolType.UNDEF) -> Parser:
+        utils.unimplement_method()
+
+    def create_transport(self, transport_type) -> Transport:
+        utils.unimplement_method()
+
 class App:
     
     def __init__(self):
@@ -91,35 +147,6 @@ class App:
         pass
 
 
-class Pet:
-    def __init__(self):
-        print("Pet constructed")
 
-    def voice(self):
-        pass
-
-class Dog(Pet):
-    def __init__(self):
-        Pet.__init__(super)
-        print("Dog constructed")
-
-    def voice(self):
-        print("Waf Waf Waf")
-
-class Cat(Pet):
-    def __init__(self):
-        Pet.__init__(self)
-        print("Cat constructed")
-
-    def voice(self):
-        print("Mayu mayu mayu")
-
-
-#app = App()
-#print(app.input_method.get_procedure())
-
-pets = (Dog(), Cat(), Pet())
-
-for pet in pets:
-    pet.voice()
-
+app = App()
+print(app.input_method.get_procedure())
