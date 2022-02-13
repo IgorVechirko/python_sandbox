@@ -37,14 +37,14 @@ class Request:
         self._serializer = serializer
         self._procedure = procedure
 
-    def header_data(self) -> bytearray():
+    def header_data(self) -> bytearray:
         utils.unimplement_method()
 
-    def pdu_data(self) -> byteaaray():
+    def pdu_data(self) -> bytearray:
         utils.unimplement_method()
 
 class Transport:
-    def __init__(self, transport_type = Transport.UNDEF):
+    def __init__(self, transport_type = TransportType.UNDEF):
         self._transport_type = transport_type
 
     def send_request(self, request):
@@ -126,16 +126,16 @@ class Factory:
 class App:
     
     def __init__(self):
-        
         self.protocol_type = ProtocolType.JSON
-        self.transport_info = TransportInfo()
-        self.input_method = IOMethod()
+        #self.transport_info = TransportInfo()
+        self.input_method = Console()
+        self.transport = IPv4Transport()
 
         if self.protocol_type == ProtocolType.UNDEF:
             print("Undefined protocol type")
             sys.exit(1)
 
-        self.transport = self.create_transport(self.transport_info)
+        #self.transport = self.create_transport(self.transport_info)
         if self.transport == None:
             print("Can't create transport")
             sys.exit(1)
