@@ -1,7 +1,7 @@
 import sys
 
-from loger import Logger
+from rpc.loger import Logger
 
-def unimplement_method():
+def unimpl_meth():
 	Logger.error("Unimplemented method");
 	sys.exit(1)
