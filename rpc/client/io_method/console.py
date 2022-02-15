@@ -1,6 +1,14 @@
 from rpc.client.io_method.io_method import IOMethod
+from rpc.types.io_type import IOType
 
 class Console(IOMethod):
+    def __init__(self):
+        IOMethod.__init__(self, IOType.CONSOLE)
+
+    def get_input(self) -> str:
+        return "first --second third"
+
+
     def get_procedure(self):
         method = sys.argv[1]
         params = {}

@@ -36,7 +36,7 @@
     <Compile Include="rpc\client\io_method\io_method.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="rpc\client\io_method\io_type.py">
+    <Compile Include="rpc\types\io_type.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="rpc\client\io_method\__init__.py">
@@ -79,17 +79,20 @@
     <Compile Include="rpc\client\transport\transport.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="rpc\client\transport\transport_type.py">
+    <Compile Include="rpc\types\transport_type.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="rpc\client\transport\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="rpc\types\__init__.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="rpc\utils.py" />
     <Compile Include="rpc\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="rpc\client\protocol\protocol.py">
+    <Compile Include="rpc\types\protocol.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="rpc\client\protocol\serializer.py">
@@ -104,10 +107,8 @@
     <Folder Include="rpc\client\procedure\" />
     <Folder Include="rpc\client\protocol\" />
     <Folder Include="rpc\client\transport\" />
-    <Folder Include="rpc_client\" />
     <Folder Include="rpc\" />
-    <Folder Include="rpc_client\transport\" />
-    <Folder Include="rpc_client\rpc_protocol\" />
+    <Folder Include="rpc\types\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
