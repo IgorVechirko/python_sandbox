@@ -1,33 +1,52 @@
 from rpc import utils
+
 from rpc.loger import Logger
-from rpc.client.factory import Factory
 from rpc.types.protocol import ProtocolType
 from rpc.types.transport_type import TransportType
 from rpc.types.io_type import IOType
 
-g_rpc_protocl = ProtocolType.JSON
+from rpc.client.factory import Factory
+from rpc.client.configuration import Configuration
+
+import time
+
+
+g_rpc_protocol = ProtocolType.JSON
 g_transport_type = TransportType.IPv4
-g_io_type = IOType.CONSOLE
+g_io_type = IOType.CLI_ARGUMENTS
 
 
 class App:
     
     def __init__(self):
-        self._serializer = Factory.creat_serializer(g_rpc_protocl);
-        utils.fatal_none(self._serializer)
-        self._parser = Factory.create_pareser(g_rpc_protocl);
-        utils.fatal_none(self._parser)
 
-        self._transport = Factory.create_transport(g_transport_type)
+        config =  self._configuration = Configuration()
+        config._protocol = ProtocolType.JSON
+        config._transport_type = TransportType.IPv4
+        config._io_type = IOType.CLI_ARGUMENTS
+        config._transport_params["address"] = "127.0.0.1"
+        config._transport_params["port"] = 9999
+
+        factory = self._factory = Factory()
+
+        self._protocol = factory.create_protocol(config._protocol);
+        utils.fatal_none(self._protocol)
+
+        self._transport = factory.create_transport(config._transport_type, self._protocol)
         utils.fatal_none(self._transport)
 
-        self._io_method = Factory.create_io_method(g_io_type)
+        self._io_method = factory.create_io_method(config._io_type)
         utils.fatal_none(self._io_method)
 
 
     def run(self):
-        while(True):
-            input = self._io_method.get_input()
-            Logger.error("Get input: ", input)
-            Logger.error("Procedure: ", self._io_method.get_procedure(input))
+        if(not self._transport.start(self._configuration._transport_params)):
+            Logger.error("Can't start transport");
+            return
 
+        while(True):
+            time.sleep(1)
+            #self._transport.send_procedure()
+
+        while(True):
+            pass

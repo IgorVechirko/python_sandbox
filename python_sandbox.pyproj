@@ -12,7 +12,7 @@
     <Name>python_sandbox</Name>
     <RootNamespace>python_sandbox</RootNamespace>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <CommandLineArguments>first --second third</CommandLineArguments>
+    <CommandLineArguments>first --second --third</CommandLineArguments>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
     <IsWindowsApplication>False</IsWindowsApplication>
   </PropertyGroup>
@@ -27,15 +27,15 @@
   <ItemGroup>
     <Compile Include="main.py" />
     <Compile Include="python_sandbox.py" />
+    <Compile Include="rpc\client\configuration.py" />
     <Compile Include="rpc\client\factory.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="rpc\client\io_method\console.py">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="rpc\client\io_method\cli_args.py" />
     <Compile Include="rpc\client\io_method\io_method.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="rpc\client\protocol\protocol.py" />
     <Compile Include="rpc\types\io_type.py">
       <SubType>Code</SubType>
     </Compile>
@@ -45,34 +45,22 @@
     <Compile Include="rpc\client\app.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="rpc\client\procedure\procedure.py">
+    <Compile Include="rpc\types\procedure.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="rpc\client\procedure\__init__.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="rpc\client\protocol\json_parser.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="rpc\client\protocol\parser.py">
+    <Compile Include="rpc\client\protocol\json_protocol.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="rpc\client\transport\ipv4_transport.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="rpc\client\transport\request.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="rpc\client\transport\response.py">
+    <Compile Include="rpc\client\transport\transport_task.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="rpc\client\__init__.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="rpc\loger.py" />
-    <Compile Include="rpc\client\protocol\json_serializer.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="rpc\client\protocol\__init__.py">
       <SubType>Code</SubType>
     </Compile>
@@ -95,16 +83,12 @@
     <Compile Include="rpc\types\protocol.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="rpc\client\protocol\serializer.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="server_socket.py" />
     <Compile Include="client_socket.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="rpc\client\" />
     <Folder Include="rpc\client\io_method\" />
-    <Folder Include="rpc\client\procedure\" />
     <Folder Include="rpc\client\protocol\" />
     <Folder Include="rpc\client\transport\" />
     <Folder Include="rpc\" />

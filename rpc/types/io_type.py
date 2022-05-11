@@ -2,4 +2,4 @@ from enum import Enum
 
 class IOType(Enum):
 	UNDEF = 0
-	CONSOLE = 1
+	CLI_ARGUMENTS = 1

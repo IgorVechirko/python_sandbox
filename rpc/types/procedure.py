@@ -4,6 +4,6 @@ class Procedure:
         self._name = name
         self._params = params
 
-class ProcedureResult:
+class ProcedureResponse:
     def __init__(self, result_fields = {}):
-        self._result_fields = result_fielde
+        self._result_fields = result_fields

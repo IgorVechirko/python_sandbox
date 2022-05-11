@@ -1,12 +1,11 @@
 from rpc import utils
-from rpc.types.procedure from
+from rpc.types.io_type import IOType
+from rpc.types.procedure import Procedure, ProcedureResponse
+
 
 class IOMethod:
-    def __init__(self, io_type):
+    def __init__(self, io_type: IOType):
         self._io_type = io_type
 
-    def get_procedure(self, io_type):
-        utils.unimpl_meth()
-
-    def put_result(self, result):
-        utils.unimpl_meth()
+    def put_procedure(self, procedure: Procedure, resp_handler):
+        pass
