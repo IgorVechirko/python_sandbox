@@ -11,16 +11,12 @@ from rpc.client.configuration import Configuration
 import time
 
 
-g_rpc_protocol = ProtocolType.JSON
-g_transport_type = TransportType.IPv4
-g_io_type = IOType.CLI_ARGUMENTS
-
 
 class App:
     
     def __init__(self):
 
-        config =  self._configuration = Configuration()
+        config = self._configuration = Configuration()
         config._protocol = ProtocolType.JSON
         config._transport_type = TransportType.IPv4
         config._io_type = IOType.CLI_ARGUMENTS
@@ -35,18 +31,12 @@ class App:
         self._transport = factory.create_transport(config._transport_type, self._protocol)
         utils.fatal_none(self._transport)
 
-        self._io_method = factory.create_io_method(config._io_type)
+        self._io_method = factory.create_io_method(config._io_type, self._transport)
         utils.fatal_none(self._io_method)
 
 
     def run(self):
-        if(not self._transport.start(self._configuration._transport_params)):
-            Logger.error("Can't start transport");
-            return
-
-        while(True):
-            time.sleep(1)
-            #self._transport.send_procedure()
-
-        while(True):
-            pass
+        try:
+            self._io_method.start()
+        except Exception as err:
+            raise Exception(err.args, "Can't connect transport")

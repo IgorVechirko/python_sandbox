@@ -14,21 +14,25 @@ class IPv4Transport(Transport):
         self._socket = None
         return
 
-    def start(self, connection_params = {}) -> bool:
+    def start(self, connection_params = {}):
+
+        if(not "address" in connection_params):
+            raise Exception("There's no IPv4 address")
+        if(not "port" in connection_params):
+            raise Exception("There's no IPv4 port")
+
         address = connection_params["address"]
         port = connection_params["port"]
         
-        try:
-            self._socket = socket.create_connection((address,port))
-        finally:
-            Logger.error("Can't connect to address: ", address, ":", port);
-            return False
+        Logger.info("Connecting to: {}:{}...".format(address, port))
 
-        if(self._socket == None):
-            Logger.error("Can't connect to address: ", address, ":", port);
-            return False
+#        try:
+#            self._socket = socket.create_connection((address,port))
+#        except Exception as err:
+#            raise Exception(err.args, "Can't connect to : {}:{}".format(address,port))
 
-        return Transport.start(self)
+        Transport.start(self)
+
 
     def send_task(self, task: TransportTask):
         

@@ -29,9 +29,9 @@ class Factory:
             Logger.error("Can't construct transport type: ", transport_type)
             return None
 
-    def create_io_method(self, io_type: IOType) -> IOMethod:
+    def create_io_method(self, io_type: IOType, transport: Transport) -> IOMethod:
         if(io_type == IOType.CLI_ARGUMENTS):
-            return CliArgs()
+            return CliArgs(transport)
         else:
             Logger.error("Can't construct ioMethod type: ", io_type)
             return None

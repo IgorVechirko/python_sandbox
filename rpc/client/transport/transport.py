@@ -25,10 +25,9 @@ class Transport:
         return
 
 
-    def start(self) -> bool:
-        send_tread_id = _thread.start_new_thread(self.send_worker)
-        recv_tread_id = _thread.start_new_thread(self.recv_worker, [self._finish_recv_worker_eve])
-        return True
+    def start(self):
+        send_thread_id = _thread.start_new_thread(self.send_worker)
+        recv_thread_id = _thread.start_new_thread(self.recv_worker, [self._finish_recv_worker_eve])
 
     def finish_transport(self):
         self._finish_send_worker_eve.set()
@@ -61,8 +60,8 @@ class Transport:
                 self._wait_send_tasks_cv.wait()
                 self._tasks_to_send, tasks_to_send = tasks_to_send, self._tasks_to_send 
 
-            for task_to_send in tasks_to_send:
-                self.send_task(task_to_send)
+            for task in tasks_to_send:
+                self.send_task(task)
             
             if(self._finish_send_worker_eve.is_set()):
                 break
